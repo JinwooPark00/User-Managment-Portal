@@ -38,6 +38,9 @@ public class WebSecurityConfig {
 
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
+    @Autowired
+    MyAuthenticationSuccessHandler authenticationSuccessHandler;
+
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -53,22 +56,15 @@ public class WebSecurityConfig {
                 .authenticated()
                 .and()
                 .formLogin()
+                .successHandler(authenticationSuccessHandler)
 //                .loginPage("/login")
 //                .loginProcessingUrl("/login")
-                .successHandler(new AuthenticationSuccessHandler() {
-                    @Override
-                    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
-                                                        Authentication authentication) throws IOException, ServletException {
-                        redirectStrategy.sendRedirect(request, response, "/home");
-                    }
-                })
                 .permitAll()
                 .and()
                 .logout()
-                .permitAll()
-                .and()
-                .exceptionHandling().accessDeniedHandler(accessDeniedHandler);
-        ;
+                .permitAll();
+        //                .and()
+        //                .exceptionHandling().accessDeniedHandler(accessDeniedHandler)
         return http.build();
     }
 
