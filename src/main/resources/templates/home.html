@@ -3,21 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>User Management Portal</title>
+
+    <div th:replace="fragments/header :: header-css"/>
 </head>
 <body>
 
-<nav class="navbar navbar-inverse">
-    <div class="container">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="/search">Ajax Search</a>
-        </div>
-    </div>
-</nav>
+<div th:replace="fragments/header :: header"/>
 
-<h1>Home Screen</h1>
+<div class="container">
+    <h1>Home Screen</h1>
 
-<form th:action="@{/logout}" method="POST">
-    <input type="submit" value="Sign Out"/>
-</form>
+    <form th:action="@{/logout}" method="POST">
+        <input type="submit" value="Sign Out"/>
+    </form>
+
+</div>
 </body>
 </html>
