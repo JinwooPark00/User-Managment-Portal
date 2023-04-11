@@ -7,22 +7,21 @@ import org.springframework.web.servlet.ModelAndView;
 public class IndexController {
 
     @GetMapping({"/", "home"})
-    public ModelAndView index(){
+    public ModelAndView index() {
         ModelAndView mav = new ModelAndView("home");
 
         return mav;
     }
 
-    @RequestMapping(value={"/login"}, method = RequestMethod.GET)
-    public ModelAndView login(){
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("login");
+    @RequestMapping(value = {"/login"}, method = RequestMethod.GET)
+    public ModelAndView login() {
+        ModelAndView mav = new ModelAndView("login");
         return mav;
     }
 
 
     @GetMapping({"/search"})
-    public ModelAndView search(){
+    public ModelAndView search() {
         ModelAndView mav = new ModelAndView("search");
 
         return mav;

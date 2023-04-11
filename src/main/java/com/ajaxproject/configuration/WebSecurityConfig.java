@@ -44,10 +44,10 @@ public class WebSecurityConfig {
                 .authenticated()
                 .and()
                 .formLogin()
-                .successHandler(authenticationSuccessHandler)
                 .loginPage("/login")
                 .loginProcessingUrl("/login")
                 .permitAll()
+                .successHandler(authenticationSuccessHandler)
                 .and()
                 .logout()
                 .permitAll()
@@ -58,7 +58,7 @@ public class WebSecurityConfig {
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().antMatchers("/images/**", "/js/**", "/webjars/**");
+        return (web) -> web.ignoring().antMatchers("/images/**", "/static/**", "/webjars/**", "/js/**", "/css/**");
     }
 
     @Bean

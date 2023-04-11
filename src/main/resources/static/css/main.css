@@ -1,0 +1,10 @@
+#home-start-here-btn, #sign-in-btn{
+    background-color:#FFA337;
+    color:#ffffff;
+}
+
+#home-start-here-btn, #sign-in-btn:hover {
+    background-color:#f49322;
+    color:#ffffff;
+}
+
