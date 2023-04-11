@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /*
-    Accept a Search Criteria and returns a ResponseEntity
+    Accept Search Criteria and returns a ResponseEntity
  */
 @RestController
 public class SearchController {

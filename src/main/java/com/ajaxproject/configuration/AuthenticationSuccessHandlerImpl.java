@@ -20,42 +20,25 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Component
-public class MyAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
+public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHandler {
 
     protected Log logger = LogFactory.getLog(this.getClass());
 
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
     @Override
-    public void onAuthenticationSuccess(HttpServletRequest request,
-                                        HttpServletResponse response, Authentication authentication)
+    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
             throws IOException {
-
         handle(request, response, authentication);
-        clearAuthenticationAttributes(request);
     }
 
-    protected void handle(
-            HttpServletRequest request,
-            HttpServletResponse response,
-            Authentication authentication
-    ) throws IOException {
-
+    protected void handle(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
+            throws IOException {
         if (response.isCommitted()) {
-            logger.debug(
-                    "Response has already been committed. Unable to redirect"
-            );
+            logger.debug("Response has already been committed. Unable to redirect");
             return;
         }
 
         redirectStrategy.sendRedirect(request, response, "/home");
-    }
-
-    protected void clearAuthenticationAttributes(HttpServletRequest request) {
-        HttpSession session = request.getSession(false);
-        if (session == null) {
-            return;
-        }
-        session.removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
     }
 }

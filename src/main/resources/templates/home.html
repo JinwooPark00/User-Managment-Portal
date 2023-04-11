@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>User Management Portal</title>
@@ -9,13 +9,15 @@
 <nav class="navbar navbar-inverse">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">Ajax Search</a>
+            <a class="navbar-brand" href="/search">Ajax Search</a>
         </div>
     </div>
 </nav>
 
 <h1>Home Screen</h1>
 
-
+<form th:action="@{/logout}" method="POST">
+    <input type="submit" value="Sign Out"/>
+</form>
 </body>
 </html>

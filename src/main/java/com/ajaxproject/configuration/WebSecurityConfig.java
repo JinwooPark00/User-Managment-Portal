@@ -3,16 +3,11 @@ package com.ajaxproject.configuration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -21,14 +16,6 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 @Configuration
 @EnableWebSecurity
@@ -39,13 +26,14 @@ public class WebSecurityConfig {
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
     @Autowired
-    MyAuthenticationSuccessHandler authenticationSuccessHandler;
+    AuthenticationSuccessHandlerImpl authenticationSuccessHandler;
+
+    @Autowired
+    AccessDeniedHandlerImpl accessDeniedHandler;
 
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-
-
         http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/", "/home")
@@ -62,9 +50,9 @@ public class WebSecurityConfig {
                 .permitAll()
                 .and()
                 .logout()
-                .permitAll();
-        //                .and()
-        //                .exceptionHandling().accessDeniedHandler(accessDeniedHandler)
+                .permitAll()
+                .and()
+                .exceptionHandling().accessDeniedHandler(accessDeniedHandler);
         return http.build();
     }
 
@@ -90,6 +78,7 @@ public class WebSecurityConfig {
                 .password(passwordEncoder().encode("password"))
                 .roles("ADMIN")
                 .build();
+
         return new InMemoryUserDetailsManager(user, admin);
     }
 }
