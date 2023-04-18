@@ -50,7 +50,8 @@ public class WebSecurityConfig {
                 .successHandler(authenticationSuccessHandler)
                 .and()
                 .logout()
-                .permitAll()
+                .logoutSuccessUrl("/")
+                .invalidateHttpSession(true)
                 .and()
                 .exceptionHandling().accessDeniedHandler(accessDeniedHandler);
         return http.build();

@@ -22,5 +22,31 @@
     </nav>
 </div>
 
+<div th:fragment="header-logged-in-user">
+    <nav class="navbar navbar-dark" style="border-radius: 0;background-color:#313131;">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">User Management Portal | User</a>
+            </div>
+            <div class="nav-item">
+                <a class="navbar-brand" th:href="@{/logout}">Sign out</a>
+            </div>
+        </div>
+    </nav>
+</div>
+
+<div th:fragment="header-logged-in-admin">
+    <nav class="navbar navbar-dark" style="border-radius: 0;background-color:#313131;">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">User Management Portal | Admin</a>
+            </div>
+            <div class="nav-item">
+                <a class="navbar-brand" th:href="@{/logout}">Sign out</a>
+            </div>
+        </div>
+    </nav>
+</div>
+
 </body>
 </html>
