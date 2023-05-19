@@ -53,9 +53,9 @@ public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHa
 
         if (authorizedRoles.contains("ROLE_ADMIN")){
             logger.info("Redirect to authorized view of admin");
-            return "/search";
+            return "/admin/main";
         }
         logger.info("Redirect to authorized view of user");
-        return "/home";
+        return "/user/main";
     }
 }

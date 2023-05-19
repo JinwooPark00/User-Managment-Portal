@@ -36,7 +36,7 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/", "/home")
+                .antMatchers("/", "/landing-page")
                 .permitAll()
                 .antMatchers("/search", "/admin/**").hasAnyRole("ADMIN")
                 .antMatchers("/user/**").hasAnyRole("USER")
@@ -50,7 +50,7 @@ public class WebSecurityConfig {
                 .successHandler(authenticationSuccessHandler)
                 .and()
                 .logout()
-                .logoutSuccessUrl("/")
+//                .logoutSuccessUrl("/")
                 .invalidateHttpSession(true)
                 .and()
                 .exceptionHandling().accessDeniedHandler(accessDeniedHandler);
