@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Home</title>
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+<body>
+
+<div th:replace="fragments/header :: header-logged-in-admin"/>
+
+
+<div class="container" style="height:100vh;">
+
+    <div class="row" style="margin-top:70px;">
+        <div class="col-8">
+
+            <nav class="navbar" style="border-radius: 0;">
+                <div class="nav-item">
+                    <a class="navbar-brand" th:href="@{/logout}" style="margin-left:5px; margin-right:5px;">feature1</a>
+                </div>
+                <div class="nav-item">
+                    <a class="navbar-brand" th:href="@{/logout}" style="margin-left:5px; margin-right:5px;">feature2</a>
+                </div>
+                <div class="nav-item"  style="margin-right:70px;">
+                    <a class="navbar-brand" th:href="@{/logout}" style="margin-left:5px; margin-right:5px;">feature3</a>
+                </div>
+            </nav>
+
+            <p>area 1</p>
+
+        </div>
+
+        <div class="col-4" style="border-left: 1px solid #313131;height:80vh;">
+            <p>area 2</p>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>
